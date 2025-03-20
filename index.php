@@ -1,5 +1,13 @@
+<?php
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +16,7 @@
 </head>
 <body class="bg-gradient-to-r from-emerald-400 to-cyan-400">
     <main >
-        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 max-w-2xl mt-50 text-white mx-auto pt-5 rounded-lg shadow-lg flex justify-center">
+        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 max-w-xl mt-50 text-white mx-auto pt-5 rounded-lg shadow-lg flex justify-center pb-5">
             <div class="flex-col">
                 <h1 class="text-4xl">Password Generator</h1>
                 <form action="" class="mt-5">
@@ -38,6 +46,8 @@
                         </div>
 
                     </div>
+                    <button class="bg-green-700 rounded px-2 py-1 cursor-pointer mt-5 hover:bg-green-500 delay-100 transition-all">Genera</button>
+                    <button class="border rounded px-2 py-1 cursor-pointer hover:bg-red-600 delay-100 transition-all">Reset</button>
                     
                 </form>
             </div>
