@@ -1,8 +1,59 @@
 <?php
 
+$lengthFilter = 0;
+$repetitionFilter = false;
+$lettersFilter = false;
+$numbersFilter = false;
+$simbolsFilter = false;
+
+$alphabet = ""
 
 
+if(isset($_GET["length"])){
+    $lengthFilter = $_GET["length"];
+}
+if(isset($_GET["repetition"] && $_GET["repetition"] == "on")){
+    $repetitionFilter = true;
+}
+if(isset($_GET["letters"] && $_GET["letters"] == "on")){
+    $lettersFilter = true;
+}
+if(isset($_GET["numbers"] && $_GET["numbers"] == "on")){
+    $numbersFilter = true;
+}
+if(isset($_GET["simbols"] && $_GET["simbols"] == "on")){
+    $simbolsFilter = true;
+}
 
+
+function generatePassword($length, $letters, $numbers, $simbols){
+    
+    if (!$letters && !$numbers && !$simbols) {
+        return "Errore: seleziona almeno un tipo di carattere";
+    }
+    
+    $generatedPassword = "";
+    $generatedLength = 0;
+
+    while($generatedLength < $length){
+        $randomNumber = rand(1,3);
+        if($randomNumber == 1 && $letters == true){
+            $generatedPassword .=  chr(rand(0, 9) > 5 ? rand(65, 90) : rand(97,122));
+            $generatedLength++;
+        }elseif ($randomNumber == 2 && $numbers == true){
+            $generatedPassword .=  rand(0,9);
+            $generatedLength++;
+        }elseif ($randomNumber == 3 && $simbols == true){
+            $generatedPassword .=  chr(rand(33, 47));
+            $generatedLength++;
+        }else{
+            $generatedPassword = "";
+            break;
+        }
+    }
+
+    return $generatedPassword;
+}
 ?>
 
 
@@ -19,7 +70,7 @@
         <div class="bg-gradient-to-r from-cyan-500 to-blue-500 max-w-xl mt-50 text-white mx-auto pt-5 rounded-lg shadow-lg flex justify-center pb-5">
             <div class="flex-col">
                 <h1 class="text-4xl">Password Generator</h1>
-                <form action="" class="mt-5">
+                <form action="./index.php" class="mt-5">
                     <div>
                         <label for="length">1. Lunghezza password</label>
                         <input type="number" name="length" id="length" class="bg-white rounded text-black w-20 ml-5" required>
@@ -47,7 +98,7 @@
 
                     </div>
                     <button type="submit" class="bg-green-700 rounded px-2 py-1 cursor-pointer mt-5 hover:bg-green-500 delay-100 transition-all">Genera</button>
-                    <button submit class="border rounded px-2 py-1 cursor-pointer hover:bg-red-600 delay-100 transition-all">Reset</button>
+                    <button type="reset" class="border rounded px-2 py-1 cursor-pointer hover:bg-red-600 delay-100 transition-all">Reset</button>
                     
                 </form>
             </div>
