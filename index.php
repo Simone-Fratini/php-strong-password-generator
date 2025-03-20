@@ -6,22 +6,22 @@ $lettersFilter = false;
 $numbersFilter = false;
 $simbolsFilter = false;
 
-$alphabet = ""
+
 
 
 if(isset($_GET["length"])){
     $lengthFilter = $_GET["length"];
 }
-if(isset($_GET["repetition"] && $_GET["repetition"] == "on")){
+if(isset($_GET["repetition"]) && $_GET["repetition"] == "on"){
     $repetitionFilter = true;
 }
-if(isset($_GET["letters"] && $_GET["letters"] == "on")){
+if(isset($_GET["letters"]) && $_GET["letters"] == "on"){
     $lettersFilter = true;
 }
-if(isset($_GET["numbers"] && $_GET["numbers"] == "on")){
+if(isset($_GET["numbers"]) && $_GET["numbers"] == "on"){
     $numbersFilter = true;
 }
-if(isset($_GET["simbols"] && $_GET["simbols"] == "on")){
+if(isset($_GET["simbols"]) && $_GET["simbols"] == "on"){
     $simbolsFilter = true;
 }
 
@@ -46,10 +46,8 @@ function generatePassword($length, $letters, $numbers, $simbols){
         }elseif ($randomNumber == 3 && $simbols == true){
             $generatedPassword .=  chr(rand(33, 47));
             $generatedLength++;
-        }else{
-            $generatedPassword = "";
-            break;
         }
+
     }
 
     return $generatedPassword;
@@ -101,6 +99,14 @@ function generatePassword($length, $letters, $numbers, $simbols){
                     <button type="reset" class="border rounded px-2 py-1 cursor-pointer hover:bg-red-600 delay-100 transition-all">Reset</button>
                     
                 </form>
+                <div class="bg-gray-700 mt-5 p-2 text-white rounded">
+
+                    <div>La tua password è:</div>
+                    <div class="mt-2 font-mono text-lg">
+                        <?php echo generatePassword($lengthFilter, $lettersFilter, $numbersFilter, $simbolsFilter); ?>
+                    </div>
+
+                </div>
             </div>
         </div>
     </main>
