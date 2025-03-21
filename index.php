@@ -26,7 +26,7 @@ if(isset($_GET["simbols"]) && $_GET["simbols"] == "on"){
 }
 
 
-function generatePassword($length, $letters, $numbers, $simbols){
+function generatePassword($repetition, $length, $letters, $numbers, $simbols){
     
     if (!$letters && !$numbers && !$simbols) {
         return "Errore: seleziona almeno un tipo di carattere";
@@ -37,17 +37,41 @@ function generatePassword($length, $letters, $numbers, $simbols){
 
     while($generatedLength < $length){
         $randomNumber = rand(1,3);
-        if($randomNumber == 1 && $letters == true){
-            $generatedPassword .=  chr(rand(0, 9) > 5 ? rand(65, 90) : rand(97,122));
-            $generatedLength++;
-        }elseif ($randomNumber == 2 && $numbers == true){
-            $generatedPassword .=  rand(0,9);
-            $generatedLength++;
-        }elseif ($randomNumber == 3 && $simbols == true){
-            $generatedPassword .=  chr(rand(33, 47));
-            $generatedLength++;
-        }
 
+        if($randomNumber == 1 && $letters == true){
+            $tempVar = chr(rand(0, 9) > 5 ? rand(65, 90) : rand(97,122));
+            if($repetition == true){
+                $generatedPassword .= $tempVar;
+                $generatedLength++;
+            }else{
+                if(strpos($generatedPassword, $tempVar) === false){
+                    $generatedPassword .= $tempVar;
+                    $generatedLength++;
+                }
+            }
+        }elseif ($randomNumber == 2 && $numbers == true){
+            $tempVar = rand(0,9);
+            if($repetition == true){
+                $generatedPassword .= $tempVar;
+                $generatedLength++;
+            }else{
+                if(strpos($generatedPassword, (string)$tempVar) === false){
+                    $generatedPassword .= $tempVar;
+                    $generatedLength++;
+                }
+            }
+        }elseif ($randomNumber == 3 && $simbols == true){
+            $tempVar = chr(rand(33, 47));
+            if($repetition == true){
+                $generatedPassword .= $tempVar;
+                $generatedLength++;
+            }else{
+                if(strpos($generatedPassword, $tempVar) === false){
+                    $generatedPassword .= $tempVar;
+                    $generatedLength++;
+                }
+            }
+        }
     }
 
     return $generatedPassword;
@@ -103,7 +127,7 @@ function generatePassword($length, $letters, $numbers, $simbols){
 
                     <div>La tua password è:</div>
                     <div class="mt-2 font-mono text-lg">
-                        <?php echo generatePassword($lengthFilter, $lettersFilter, $numbersFilter, $simbolsFilter); ?>
+                        <?php echo generatePassword($repetitionFilter, $lengthFilter, $lettersFilter, $numbersFilter, $simbolsFilter); ?>
                     </div>
 
                 </div>
